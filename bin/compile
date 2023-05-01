@@ -147,6 +147,7 @@ export PKG_CONFIG_PATH=/app/.heroku/vendor/lib/pkg-config:/app/.heroku/python/li
 # Disable pip's warnings about EOL Python since we show our own.
 export PIP_NO_PYTHON_VERSION_WARNING=1
 
+
 # The Application Code
 # --------------------
 

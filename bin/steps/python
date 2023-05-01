@@ -7,8 +7,9 @@ PYTHON_VERSION=$(cat runtime.txt)
 # The location of the pre-compiled python binary.
 #VENDORED_PYTHON="${S3_BASE_URL}/${STACK}/runtimes/${PYTHON_VERSION}.tar.gz"
 #edit
-VENDORED_PYTHON="https://raw.githubusercontent.com/iblogbox/heroku-buildpack-python-20/master/python-2.7.15.tar.gz"
 #VENDORED_PYTHON="https://heroku-buildpack-python.s3.amazonaws.com/heroku-18/runtimes/python-2.7.18.tar.gz"
+VENDORED_PYTHON="https://raw.githubusercontent.com/iblogbox/heroku-buildpack-python-20/master/python-2.7.15.tar.gz"
+
 
 SECURITY_UPDATE="Python has released a security update! Please consider upgrading to"
 SECURITY_UPDATE_PYPY="The PyPy project has released a security update! Please consider upgrading to"
@@ -150,6 +151,18 @@ else
 
   hash -r
 fi
+
+#edit
+SOURCE_DIR="$(dirname $0)/../compiled"
+TARGET_DIR=".heroku/python/lib"
+
+cp "$SOURCE_DIR/libcrypto.so.1.1" "$TARGET_DIR"
+echo "SOURCE_DIR -> $SOURCE_DIR"
+echo "TARGET_DIR -> $TARGET_DIR"
+
+export LD_LIBRARY_PATH=.heroku/python/lib:$LD_LIBRARY_PATH
+echo "LD_LIBRARY_PATH -> $LD_LIBRARY_PATH"
+
 
 set -e
 
