@@ -218,7 +218,7 @@ PIP_WHEEL="${TMPDIR:-/tmp}/${PIP_WHEEL_FILENAME}"
 #fi
 
 #edit
-echo "copy $SOURCE_DIR/pip/${PIP_WHEEL_FILENAME} -> ${PIP_WHEEL}"
+echo "copy PIP whl: $SOURCE_DIR/pip/${PIP_WHEEL_FILENAME} -> ${PIP_WHEEL}"
 cp "$SOURCE_DIR/pip/${PIP_WHEEL_FILENAME}" "${PIP_WHEEL}"
 
 /app/.heroku/python/bin/python "${PIP_WHEEL}/pip" install --quiet --disable-pip-version-check --no-cache \
