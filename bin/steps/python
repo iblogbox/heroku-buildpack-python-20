@@ -211,11 +211,15 @@ fi
 PIP_WHEEL_URL="${S3_BASE_URL}/common/${PIP_WHEEL_FILENAME}"
 PIP_WHEEL="${TMPDIR:-/tmp}/${PIP_WHEEL_FILENAME}"
 
-if ! curl -sSf "${PIP_WHEEL_URL}" -o "$PIP_WHEEL"; then
-  mcount "failure.python.download-pip"
-  puts-warn "Failed to download pip"
-  exit 1
-fi
+#if ! curl -sSf "${PIP_WHEEL_URL}" -o "$PIP_WHEEL"; then
+#  mcount "failure.python.download-pip"
+#  puts-warn "Failed to download pip"
+#  exit 1
+#fi
+
+#edit
+echo "copy $SOURCE_DIR/pip/${PIP_WHEEL_FILENAME} -> ${PIP_WHEEL}"
+cp "$SOURCE_DIR/pip/${PIP_WHEEL_FILENAME}" "${PIP_WHEEL}"
 
 /app/.heroku/python/bin/python "${PIP_WHEEL}/pip" install --quiet --disable-pip-version-check --no-cache \
   "${PIP_WHEEL}" "setuptools==${SETUPTOOLS_VERSION}" "wheel==${WHEEL_VERSION}"
